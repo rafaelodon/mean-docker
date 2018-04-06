@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+label{    
+    display: block;    
+}
+
+label::after{
+    content: ': '
+}
+
+input, textarea, select{
+    width: 50%;    
+    margin-bottom: 15px;    
+}
