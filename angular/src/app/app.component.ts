@@ -26,7 +26,11 @@ export class AppComponent implements OnInit{
   }
 
   appendApiUrl(path:string){
-    return window.location.protocol + "//" + window.location.hostname + ":8080" + path;
+    if(window.location.host.indexOf("localhost:4200") >= 0){
+      return "http://localhost:8080" + path;
+    }else{
+      return window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + path;
+    }
   }
 
   refresh(){
