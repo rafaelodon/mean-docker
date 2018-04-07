@@ -5,7 +5,7 @@ tasks = [];
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send(tasks);
+  res.send({ list : tasks });
 });
 
 router.post('/', function(req, res, next) {
