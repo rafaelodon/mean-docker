@@ -25,6 +25,10 @@ export class AppComponent implements OnInit{
     this.refresh();
   }
 
+  appendApiUrl(path:string){
+    return window.location.protocol + "//" + window.location.hostname + ":8080" + path;
+  }
+
   refresh(){
     this.task = {
       title : '',
@@ -32,7 +36,7 @@ export class AppComponent implements OnInit{
       state : 'todo'
     }
 
-    this.http.get("http://localhost:3000/tasks").subscribe(
+    this.http.get(this.appendApiUrl("/tasks")).subscribe(
       next => {
         this.tasks = next.json().list;        
       }
@@ -41,7 +45,7 @@ export class AppComponent implements OnInit{
 
   onClickAdd(){    
     this.task['date'] = new Date();        
-    this.http.post("http://localhost:3000/tasks", this.task).subscribe(
+    this.http.post(this.appendApiUrl("/tasks"), this.task).subscribe(
       next => this.refresh()
     )
   }
