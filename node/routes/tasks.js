@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
-
-tasks = [];
+var db = require('../db');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send({ list : tasks });
+router.get('/', function(request, response, next) {
+  db.getDb().collection("tasks").find({}).toArray(function(err, result) {
+    if (err) throw err;    
+    response.send({ list: result});
+  });
 });
 
-router.post('/', function(req, res, next) {
-  var task = req.body;
-  tasks.push({
-    title: task.title,
-    description: task.description,
-    state : task.state,
-    date : new Date()
+router.post('/', function(request, response, next) {
+  var task = request.body;
+  task.date = new Date();
+  db.getDb().collection("tasks").insertOne(task, function(err, result) {
+    if (err) throw err;
+    response.send();
   });
-  res.send();
+
 });
 
 module.exports = router;
