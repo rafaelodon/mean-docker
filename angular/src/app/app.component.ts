@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ export class AppComponent implements OnInit{
 
   tasks = [];
 
+  modal:NgbModalRef = undefined;
+
   task = {
     title : 't',
     description : 'd',
@@ -18,11 +21,16 @@ export class AppComponent implements OnInit{
 
   states = ['todo','wip','done'];
 
-  constructor(private http:Http){
+  constructor(private http:Http,
+    private modalService:NgbModal){
   }
 
   ngOnInit(){
     this.refresh();
+  }
+
+  open(content) {
+    this.modal = this.modalService.open(content);    
   }
 
   appendApiUrl(path:string){
@@ -50,7 +58,11 @@ export class AppComponent implements OnInit{
   onClickAdd(){    
     this.task['date'] = new Date();        
     this.http.post(this.appendApiUrl("/tasks"), this.task).subscribe(
-      next => this.refresh()
+      next => {
+        this.refresh()
+        this.modal.close();
+      }
     )
+    
   }
 }

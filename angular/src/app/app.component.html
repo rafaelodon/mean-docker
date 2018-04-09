@@ -1,30 +1,60 @@
-<h1>Test</h1>
-<div style="border: 1px solid grey; padding: 15px; margin-bottom: 15px;">
-    <h2>New task</h2>
-    <div>
-        <label for="title">Title</label>
-        <input [(ngModel)]="task.title" id="title" />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Tasks</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button class="btn" (click)="open(form)">Add new task</button>
+            </li>                        
+        </ul>
     </div>
-    <div>
-        <label for="description">Description</label>
-        <textarea [(ngModel)]="task.description" id="description"></textarea>
-    </div>
-    <div>
-        <label for="state">State</label>
-        <select [(ngModel)]="task.state" id="state">
-            <option *ngFor="let s of states" [value]="s">{{s}}</option>
-        </select>        
-    </div>
-    <div>
-        <button (click)="onClickAdd()">Add</button>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <div *ngFor="let t of tasks" class="card" style="float: left; margin: 0px 8px 8px 0px"
+                [class.bg-success]="t.state == 'done'"
+                [class.bg-warning]="t.state == 'wip'">
+                <div class="card-body">
+                    <h5 class="card-title">{{t.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <b>{{t.state}}</b> on {{t.date | date: 'dd/MM/yyyy'}}</h6>
+                    <p class="card-text">{{t.description}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div style="border: 1px solid grey; padding: 15px">
-    <h2>Tasks</h2>    
-    <ul>
-        <li *ngFor="let t of tasks">
-            <b>{{t.title}}:</b> {{t.description}}<br/>
-            <b>{{t.state}}</b> on {{t.date | date: 'dd/MM/yyyy'}}
-        </li>
-    </ul>
-</div>
+
+<ng-template #form let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">New Task</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label for="title">Title</label>
+            <input [(ngModel)]="task.title" id="title" />
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea [(ngModel)]="task.description" id="description"></textarea>
+        </div>
+        <div>
+            <label for="state">State</label>
+            <select [(ngModel)]="task.state" id="state">
+                <option *ngFor="let s of states" [value]="s">{{s}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="onClickAdd()">Add</button>
+    </div>
+</ng-template>
