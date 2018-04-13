@@ -9,7 +9,7 @@ if(process.env.MONGODB_USER){
   USER = process.env.MONGODB_USER;
   PASSWORD = process.env.MONGODB_PASSWORD;
   DATABASE = process.env.MONGODB_DATABASE;
-  HOST = process.env.MONGODB_SERVICE_HOST;
+  HOST = process.env.DATABASE_SERVICE_NAME;
   PORT = process.env.MONGODB_SERVICE_PORT;
 };
 
