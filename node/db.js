@@ -5,17 +5,17 @@ var DATABASE = "";
 var HOST = "localhost";
 var PORT = "27017";
 
-console.log(process.env);
-
 if(process.env.MONGODB_USER){  
   USER = process.env.MONGODB_USER;
   PASSWORD = process.env.MONGODB_PASSWORD;
   DATABASE = process.env.MONGODB_DATABASE;
+  HOST = process.env.MONGODB_SERVICE_HOST;
+  PORT = process.env.MONGODB_SERVICE_PORT;
 };
 
 var mongo_url = "mongodb://"+USER+":"+PASSWORD+"@"+HOST+":"+PORT+"/"+DATABASE;
 
-// if OPENSHIFT env variables are present, use the available connection info:
+console.log("MongoDB connection url: "+mongo_url);
 
 var _db;
 
