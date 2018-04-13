@@ -5,15 +5,16 @@ var DATABASE = "";
 var HOST = "localhost";
 var PORT = "27017";
 
+var mongo_url = "mongodb://"+USER+":"+PASSWORD+"@"+HOST+":"+PORT+"/"+DATABASE;
+
 if(process.env.MONGODB_USER){  
   USER = process.env.MONGODB_USER;
   PASSWORD = process.env.MONGODB_PASSWORD;
   DATABASE = process.env.MONGODB_DATABASE;
-  HOST = process.env.DATABASE_SERVICE_NAME;
-  PORT = process.env.MONGODB_SERVICE_PORT;
-};
+  HOST = process.env.DATABASE_SERVICE_NAME;  
 
-var mongo_url = "mongodb://"+USER+":"+PASSWORD+"@"+HOST+":"+PORT+"/"+DATABASE;
+  mongo_url = "mongodb://"+USER+":"+PASSWORD+"@"+HOST+"/"+DATABASE;
+};
 
 console.log("MongoDB connection url: "+mongo_url);
 
