@@ -5,7 +5,9 @@ var DATABASE = "";
 var HOST = "localhost";
 var PORT = "27017";
 
-if(process.env.MONGODB_USER){
+console.log(process.env);
+
+if(process.env.MONGODB_USER){  
   USER = process.env.MONGODB_USER;
   PASSWORD = process.env.MONGODB_PASSWORD;
   DATABASE = process.env.MONGODB_DATABASE;
