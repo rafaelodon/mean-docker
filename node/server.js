@@ -1,22 +1,16 @@
 //Imports
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var tasksRouter = require('./routes/tasks');
+var tasksRouter = require('./tasks');
 
 //App
 var app = express();
 
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-// CORS for Angular development mode
+// CORS
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -24,5 +18,5 @@ app.use(function (req, res, next) {
 });
 
 app.use('/tasks', tasksRouter);
-
-module.exports = app;
+app.listen(8080, '0.0.0.0');  
+console.log("Listening on 0.0.0.0:8080")

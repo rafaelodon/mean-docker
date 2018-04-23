@@ -33,12 +33,8 @@ export class AppComponent implements OnInit{
     this.modal = this.modalService.open(content);    
   }
 
-  appendApiUrl(path:string){
-    if(window.location.host.indexOf("localhost:4200") >= 0){
-      return "http://localhost:8080" + path;
-    }else{
-      return window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + path;
-    }
+  appendApiUrl(path:string){    
+    return "http://localhost:8080" + path;    
   }
 
   refresh(){
