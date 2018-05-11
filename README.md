@@ -12,11 +12,16 @@ A multicontainer project is defined with angular/nginx as frontend, node as the 
 
 From the project root foolder:
 
-* Build the images:
+* Build the front-end image:
+
  `docker build -t odon/tasks-angular angular`
+
+* Build the back-end image:
+
  `docker build -t odon/tasks-node node`
 
 * Run the multi-container stack:
+
  `docker-compose up`
 
-Access `http://localhost:90` on your browser.
+Access `http://localhost:90` on your web browser.
