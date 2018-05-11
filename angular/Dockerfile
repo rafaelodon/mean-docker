@@ -1,7 +1,7 @@
 # Stage 0: Angular Sources + NPM/Node
 FROM node:carbon-alpine
 WORKDIR /app
-COPY package.json /app/
+COPY package.json package-lock.json /app/
 RUN npm install
 COPY ./ /app/
 RUN npm install -g @angular/cli & npm run build
