@@ -1,23 +1,23 @@
 version: "3"
 services:
         frontend:
-                image: odon/tasks-angular
+                image: tasks-angular
                 ports:
                         - "90:80"
                 links:
                         - backend
         backend:
-                image: odon/tasks-node
+                image: tasks-node
                 ports:
                         - "8080:8080"
                 environment:
                         - DB_USER=admin
                         - DB_PASSWORD=pass
-                        - DB_HOST=db
+                        - DB_HOST=mongo
                         - DB_PORT=27017
                 links:
-                        - db
-        db:
+                        - mongo
+        mongo:
                 image: mongo
                 environment:
                         - MONGO_INITDB_ROOT_USERNAME=admin
